@@ -28,11 +28,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: install aws cli
-        run: |
-          echo "installing awscli"
-          pip install awscli
-          echo "install cdk localstack cli"
-          npm install -g aws-cdk-local aws-cdk
-          cdklocal --version
-          localstack --version
+        run: docker ps
  
