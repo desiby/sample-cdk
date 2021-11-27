@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy-to-dev:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,6 +33,30 @@ jobs:
         env:
            ENVIRONMENT: dev
            CDK_DEPLOY_ACCOUNT: 000000000000
+           CDK_DEPLOY_REGION: us-east-1
+        run: |
+          cdklocal --version
+          cdklocal synth
+  
+  deploy-to-staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install localstack
+        run: |
+          pip install localstack
+          npm install -g aws-cdk-local aws-cdk
+          npm install typescript
+      - name: start localstack
+        run: |
+          localstack --version
+          localstack start --detached
+      - name: synthesize
+        env:
+           ENVIRONMENT: staging
+           CDK_DEPLOY_ACCOUNT: 111111111111
            CDK_DEPLOY_REGION: us-east-1
         run: |
           cdklocal --version
