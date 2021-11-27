@@ -36,4 +36,5 @@ jobs:
           localstack start --detached
       - name: synthesize
         run: |
+          cdklocal --version
           cdklocal synth
