@@ -19,7 +19,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    container: localstack/localstack
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -27,8 +26,14 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: list container
-        run: docker ps
-      - name: run localstack
-        run: localstack --version
- 
+      - name: install localstack
+        run: |
+          pip install localstack
+          npm install -g aws-cdk-local aws-cdk
+      - name: start localstack
+        run: |
+          localstack --version
+          localstack start
+      - name: synthesize
+        run: |
+          cdklocal synth
