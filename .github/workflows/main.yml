@@ -33,7 +33,7 @@ jobs:
       - name: start localstack
         run: |
           localstack --version
-          localstack start
+          localstack start --detached
       - name: synthesize
         run: |
           cdklocal synth
