@@ -30,6 +30,7 @@ jobs:
         run: |
           pip install localstack
           npm install -g aws-cdk-local aws-cdk
+          npm install typescript
       - name: start localstack
         run: |
           localstack --version
