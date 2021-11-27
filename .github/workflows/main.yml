@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,14 +28,11 @@ jobs:
       # Runs a single command using the runners shell
       - name: install localstack
         run: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-          echo "installing docker"
-          brew install docker
-          docker --version
           echo "installing awscli"
           pip install awscli
           echo "cdk localstack"
           npm install -g aws-cdk-local aws-cdk
           cdklocal --version
-          open --background -a Docker
+          apt install docker
+          dockerd
           docker run --rm -p 4566:4566 -p 4571:4571 localstack/localstack
