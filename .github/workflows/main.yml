@@ -29,9 +29,12 @@ jobs:
       - name: install localstack
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+          echo "installing docker"
           brew install docker
           docker --version
+          echo "installing awscli"
           pip install awscli
+          echo "cdk localstack"
           npm install -g aws-cdk-local aws-cdk
           cdklocal --version
-          docker run --rm -it -p 4566:4566 -p 4571:4571 localstack/localstack
+          docker run --rm -p 4566:4566 -p 4571:4571 localstack/localstack
