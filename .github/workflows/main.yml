@@ -27,6 +27,8 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: install aws cli
+      - name: list container
         run: docker ps
+      - name: run localstack
+        run: localstack --version
  
