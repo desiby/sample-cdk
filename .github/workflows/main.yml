@@ -33,6 +33,6 @@ jobs:
           echo "cdk localstack"
           npm install -g aws-cdk-local aws-cdk
           cdklocal --version
-          apt install docker
+          sudo apt install docker
           dockerd
           docker run --rm -p 4566:4566 -p 4571:4571 localstack/localstack
