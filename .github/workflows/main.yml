@@ -26,13 +26,15 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: install localstack
+        name: install aws cli
         run: |
           echo "installing awscli"
           pip install awscli
-          echo "cdk localstack"
+          echo "install cdk localstack cli"
           npm install -g aws-cdk-local aws-cdk
           cdklocal --version
-          sudo apt install docker
-          sudo service docker restart
-          docker run --rm -p 4566:4566 -p 4571:4571 localstack/localstack
+     
+      - uses: docker://localstack/localstack
+        name: run localstack
+        run: localstack --version
+ 
