@@ -25,14 +25,15 @@ jobs:
           pip install localstack
           npm install -g aws-cdk-local aws-cdk
           npm install typescript
-          export ENVIRONMENT=dev
-          export CDK_DEPLOY_ACCOUNT=000000000000
-          export CDK_DEPLOY_REGION=us-east-1
       - name: start localstack
         run: |
           localstack --version
           localstack start --detached
       - name: synthesize
+        env:
+           ENVIRONMENT: dev
+           CDK_DEPLOY_ACCOUNT: 000000000000
+           CDK_DEPLOY_REGION: us-east-1
         run: |
           cdklocal --version
           cdklocal synth
